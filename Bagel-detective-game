@@ -1,0 +1,47 @@
+'''
+-- instructions --
+
+In Bagels, a deductive logic game, you must guess a secret three-digit number based on clues. 
+The game offers one of the following hints in response to your guess:
+"Pico" when your guess has a correct digit in the wrong place, 
+"Fermi" when your guess has a correct digit in the correct place, 
+and "Bagels" if your guess has no correct digits. You have 3 tries to guess the secret number.
+
+'''
+
+# ----- simple/barebones soulition -------
+
+# come up with three digit number
+answer_digit = 123
+
+# provide user a hint
+clues = 'the secret three digit number is in the movie title of a john travolta film\nthe three digitis are sequential'
+
+# ask the user for an input
+user_guess = input('enter your guess for the three digit number: ')
+
+# if the answer is not correct, provide a user a hint, and reask the user for an input, up to three times
+'''
+i need to check if a user input is in the correct place, relative to answer digit place
+if the digit is not in the correct place, is it present at all in the answer
+if it is not, then the hint must be 'bagel
+the hint must be sequential - first fermi, then pico, then bagel
+if i only provide one hint per guess, what takes precident when a user input has a right digit, right place
+and right digit, wrong place - this quesiton is relevant when the correct answer has repeating digits
+for simple soulition, lets just provide hints for each digit
+'''
+iscorrect=''
+hints_per_digit = ''
+
+# chatgpt fixed my for loop to include i, and enumrate - as enumrate get the index (i) and the value of digit
+
+for i, digit in enumerate(str(user_guess)):
+    if digit == str(answer_digit)[i]:
+        hints_per_digit += 'Fermi '
+    elif digit in str(answer_digit):
+        hints_per_digit += 'Pico '
+    else:
+        hints_per_digit += 'Bagel '
+
+print('your answer produced the following hints: ',hints_per_digit)
+
