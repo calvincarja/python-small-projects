@@ -9,7 +9,9 @@ and "Bagels" if your guess has no correct digits. You have 3 tries to guess the 
 
 '''
 
-# ----- simple/barebones soulition -------
+''' 
+
+----- simple/barebones soulition -------
 
 # come up with three digit number
 answer_digit = 123
@@ -52,5 +54,60 @@ while turns < 3 and iscorrect != True:
 
 print('i am sorry, you ran out of turns to play')
         
+'''
+# --- Advance souiition ---
 
+# come up with three digit number
+answer_digit = 123
 
+# explain the rules to the user - print(""" allows for multiple print lines in 1)
+print("""
+Welcome to Baglel, a deductive game.
+You will be provided a clue, then asked to enter a three digit number.
+You will have three total tries.
+Each try will produce a hint:
+
+"Pico" when your guess has a correct digit in the wrong place,
+"Fermi" when your guess has a correct digit in the correct place,
+"Bagels" if your guess has no correct digits.
+""")
+# provide user a hint
+clues = 'the secret three digit number is in the movie title of a john travolta film\nthe three digitis are sequential'
+
+turns = 0 # keep it outside the while loop to avoid resetting it
+user_correct_text = 'FermiFermiFermi'
+iscorrect = False # i had to establish the varible outside the while loop to avoid not defined varible
+
+# while loop to allow three tries or fermi across the board
+# while turns != 3 or iscorrect != True: resulted in a infinite loop as it will continue if either or is true (the OR)
+while turns < 3 and iscorrect != True:
+    hints_per_digit = ''
+    
+    # ask the user for an input
+    user_guess = input('enter your guess for the three digit number: ')
+    # validate the input is only numbers
+    while True:
+        try:
+            user_guess = int(user_guess)
+            break
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+            user_guess = input('Enter your guess for the three digit number: ')
+
+# enumrate adds a counter to an iterator, so i can reference the counter in another varible
+
+    for i, digit in enumerate(str(user_guess)): #turn user_guess to str as it was turned to int for the try/except to work
+        if digit == str(answer_digit)[i]:
+            hints_per_digit += 'Fermi'
+        elif digit in str(answer_digit):
+            hints_per_digit += 'Pico'
+        else:
+            hints_per_digit += 'Bagel'
+
+    print('your answer produced the following hints: ',hints_per_digit)
+    turns += 1
+    if hints_per_digit == user_correct_text:
+        print('Horray, you got all the digits')
+        iscorrect = True
+
+print('i am sorry, you ran out of turns to play')
