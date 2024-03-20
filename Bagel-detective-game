@@ -55,7 +55,7 @@ while turns < 3 and iscorrect != True:
 print('i am sorry, you ran out of turns to play')
         
 '''
-# --- Advance souiition ---
+# --- Advance solution ---
 
 # come up with three digit number
 answer_digit = 123
@@ -85,15 +85,18 @@ while turns < 3 and iscorrect != True:
     
     # ask the user for an input
     user_guess = input('enter your guess for the three digit number: ')
-    # validate the input is only numbers
+    # validate the input is only numbers **left off here
     while True:
         try:
             user_guess = int(user_guess)
-            break
+            if len(str(user_guess)) == 3:
+                break
+            else:
+                print("Invalid input. Please enter a three digit number.")
+                user_guess = input('Enter your guess for the three digit number: ')
         except ValueError:
             print("Invalid input. Please enter an integer.")
             user_guess = input('Enter your guess for the three digit number: ')
-
 # enumrate adds a counter to an iterator, so i can reference the counter in another varible
 
     for i, digit in enumerate(str(user_guess)): #turn user_guess to str as it was turned to int for the try/except to work
@@ -111,3 +114,62 @@ while turns < 3 and iscorrect != True:
         iscorrect = True
 
 print('i am sorry, you ran out of turns to play')
+
+# --- Advance solution final with functions ---
+
+def display_rules_and_get_answer_digit(): # function to display rules
+    answer_digit = 123
+    print("""
+    Welcome to Baglel, a deductive game.
+    You will be provided a clue, then asked to enter a three digit number.
+    You will have three total tries.
+    Each try will produce a hint:
+
+    "Pico" when your guess has a correct digit in the wrong place,
+    "Fermi" when your guess has a correct digit in the correct place,
+    "Bagels" if your guess has no correct digits.
+    """)
+    return answer_digit
+
+def get_user_guess(): # function to accept the user input and validate
+    while True:
+        try:
+            user_guess = int(input('Enter your guess for the three digit number: '))
+            if len(str(user_guess)) == 3:
+                return user_guess # only return if passes the validation
+            else:
+                print("Invalid input. Please enter a three digit number.")
+        except ValueError:
+            print("Invalid input. Please enter an integer.")
+            user_guess = int(input('Enter your guess for the three digit number: '))
+
+
+def generate_hints(user_guess, answer_digit): # arguments are the value of the two prior functions
+    hints_per_digit = ''
+    for i, digit in enumerate(str(user_guess)):
+        if digit == str(answer_digit)[i]:
+            hints_per_digit += 'Fermi'
+        elif digit in str(answer_digit):
+            hints_per_digit += 'Pico'
+        else:
+            hints_per_digit += 'Bagel'
+    return hints_per_digit
+
+
+def play_game(): # Main function - key varibles have their respetive functions set as values 
+    answer_digit = display_rules_and_get_answer_digit() # first function
+    turns = 0
+    user_correct_text = 'FermiFermiFermi'
+    iscorrect = False
+
+    while turns < 3 and not iscorrect:
+        user_guess = get_user_guess() # second function
+        hints_per_digit = generate_hints(user_guess, answer_digit) # third function
+        print('Your answer produced the following hints: ', hints_per_digit)
+        turns += 1
+        if hints_per_digit == user_correct_text:
+            print('Hooray, you got all the digits')
+            iscorrect = True
+
+    if not iscorrect:
+        print('I am sorry, you ran out of turns to play')
