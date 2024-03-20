@@ -8,10 +8,9 @@ The game offers one of the following hints in response to your guess:
 and "Bagels" if your guess has no correct digits. You have 3 tries to guess the secret number.
 
 '''
-
+# ----- simple/barebones soulition -------
 ''' 
 
------ simple/barebones soulition -------
 
 # come up with three digit number
 answer_digit = 123
@@ -56,7 +55,7 @@ print('i am sorry, you ran out of turns to play')
         
 '''
 # --- Advance solution ---
-
+'''
 # come up with three digit number
 answer_digit = 123
 
@@ -115,7 +114,9 @@ while turns < 3 and iscorrect != True:
 
 print('i am sorry, you ran out of turns to play')
 
-# --- Advance solution final with functions ---
+'''
+
+# --- Advance solution with functions [FINAL]---
 
 def display_rules_and_get_answer_digit(): # function to display rules
     answer_digit = 123
@@ -173,3 +174,31 @@ def play_game(): # Main function - key varibles have their respetive functions s
 
     if not iscorrect:
         print('I am sorry, you ran out of turns to play')
+    
+if __name__ == "__main__": # this script is needed to call my play_game() function, 
+    play_game()
+
+'''
+context on how a function is called ---
+
+Yes, that's correct. In Python, `__name__` is a special built-in variable. When a Python file is run directly, `__name__` is set to `"__main__"`. 
+However, when a Python file is imported as a module into another Python file, `__name__` is set to the name of that file (without the .py extension).
+
+So, the following code:
+
+```python
+if __name__ == "__main__":
+    play_game()
+```
+
+is saying "if this file is being run directly (not being imported), then call the `play_game()` function". 
+This allows the file to be used both as a standalone script and as a module that other scripts can import and use.
+'''
+
+# --- Implementing changes after viewing answer ---
+'''
+implement the following:
+* the ability to replay the game with a y/n (can go inside play_game function) - input a while loop within play function, only break the loop if the user enters 'y'
+* instead of hard coding the secret digits, leverage a random function to select numbers from a list
+
+'''
