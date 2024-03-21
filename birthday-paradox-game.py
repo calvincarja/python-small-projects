@@ -29,10 +29,23 @@ random_month = random.choice(month)
 random_day = random.choice(day)
 
 print(f"The randomly selected date is {random_month} {random_day}")
+print(type(random_month))
 
 # now lets try to display multiple random chocies of month and day
 sample_size = 5
-random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)]
+random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
 print(random_list)
 
 # it worked, however the print output is not in the desired format
+# str.format()
+print('my list is: {}'.format(random_list))
+# f-strings
+print(f"my list is: {random_list[0]}")
+# use a for loop to have more control over the output
+# the key relies in storing the output of random_list into a string, using a join() to seperate with ', ' between each value
+for i in random_list:
+    print(i)
+# based on the for loop , i need to:
+    # remove the quotation marks from the string
+    # remove the comma between the month and day
+    # remove the paranthesis from each value
