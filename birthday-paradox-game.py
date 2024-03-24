@@ -1,4 +1,5 @@
 import random
+import statistics
 
 '''
 instructions:
@@ -73,3 +74,16 @@ to so, i need to store the output in a list, in order to use the .join() functio
 '''
 results = ', '.join([f"{month} {day}" for month, day in random_list])
 print(results)
+
+'''
+the problem ask to identify if a birthday is shared by more than 1 person, 
+it does not ask me for the specific birthday(s), thus, finding the MODE is sufficient
+'''
+try:
+    mode = statistics.mode(random_list)
+    print(mode)
+except statistics.StatisticsError as e:
+    if 'no unique mode' in str(e):
+        print('The list contains multiple modes')
+    else:
+        raise
