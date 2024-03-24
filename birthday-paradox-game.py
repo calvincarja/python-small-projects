@@ -24,13 +24,17 @@ print("""
 month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 day = list(range(1, 32)) # use list function to pass range(1,32), avoding to need to type 1 - 31
 
+'''
 # lets try to use a random tool to select a month and day
+
 random_month = random.choice(month)
 random_day = random.choice(day)
 
 print(f"The randomly selected date is {random_month} {random_day}")
 print(type(random_month))
+'''
 
+'''
 # now lets try to display multiple random chocies of month and day
 sample_size = 5
 random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
@@ -41,11 +45,31 @@ print(random_list)
 print('my list is: {}'.format(random_list))
 # f-strings
 print(f"my list is: {random_list[0]}")
+
 # use a for loop to have more control over the output
-# the key relies in storing the output of random_list into a string, using a join() to seperate with ', ' between each value
+
 for i in random_list:
     print(i)
+
 # based on the for loop , i need to:
     # remove the quotation marks from the string
     # remove the comma between the month and day
     # remove the paranthesis from each value
+    # since my list contains tuples, i can use two for loop iterator to address them each
+'''
+
+sample_size = int(input('how many birthdays should I generate: '))
+random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
+print(f"below are the {sample_size} birthdays:")
+
+'''
+for month, day in random_list:
+    print(f"{month} {day},")
+
+the above for loop address all three concerns,
+however I want the output to be in one line, 
+to so, i need to store the output in a list, in order to use the .join() function
+    
+'''
+results = ', '.join([f"{month} {day}" for month, day in random_list])
+print(results)
