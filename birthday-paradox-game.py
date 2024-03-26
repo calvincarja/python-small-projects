@@ -72,18 +72,21 @@ however I want the output to be in one line,
 to so, i need to store the output in a list, in order to use the .join() function
     
 '''
-results = ', '.join([f"{month} {day}" for month, day in random_list])
+results = ', '.join([f"{month} {day}" for month, day in random_list]) # in order to print in one line
 print(results)
 
 '''
 the problem ask to identify if a birthday is shared by more than 1 person, 
 it does not ask me for the specific birthday(s), thus, finding the MODE is sufficient
 '''
+
+# sucess = print(mode) or print('The list contains multiple modes')
 try:
     mode = statistics.mode(random_list)
-    print(mode)
+    print(f"mutliple people share a birthday on: {mode[0]} {mode[1]}")
 except statistics.StatisticsError as e:
-    if 'no unique mode' in str(e):
-        print('The list contains multiple modes')
+    if 'no unique mode' in str(e): # no unqiue mode signifies more than one mode
+        print('multiple people share multiple birthdays')
     else:
         raise
+
