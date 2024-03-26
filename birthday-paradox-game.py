@@ -60,8 +60,7 @@ for i in random_list:
     # remove the paranthesis from each value
     # since my list contains tuples, i can use two for loop iterator to address them each
 '''
-def calculate_random(): # lets calculate and display random_list
-    month, day = data()
+def calculate_random(month, day): # lets calculate and display random_list, pass month, day rather than re-initilizing it inside the function
     sample_size = int(input('how many birthdays should I generate: '))
     random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
     print(f"below are the {sample_size} birthdays:")
@@ -105,12 +104,16 @@ def find_shared_bday(random_list):
 '''
 
 def find_shared_bday(random_list): # passing random_list will keep the list generated in the above
-    try:
-        mode = statistics.mode(random_list)
-        print(f"mutliple people share a birthday on: {mode[0]} {mode[1]}")
-    except statistics.StatisticsError as e:
-        print("Every birthday is unique, no shared birthdays.")
+    birth_month_day = {} # will store the key:value pairs
+    for month, day in random_list: # storing tuple in dictionary
+        birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1
+    return birth_month_day
 
+def initiate():
+    instructions() 
+    month, day = data() # call data function to unpack its return values
+    random_list = calculate_random(month, day)
+    print(find_shared_bday(random_list))
 
 '''
 now i need my code to run x amount of times
@@ -119,3 +122,4 @@ once the simulation is over, i need to output the amount of times a mode was fou
 i then divide by the x amount of times it ran, and generate a average percentage 
 '''
 
+initiate()
