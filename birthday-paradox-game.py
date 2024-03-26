@@ -68,6 +68,8 @@ def calculate_random(): # lets calculate and display random_list
     results = ', '.join([f"{month} {day}" for month, day in random_list]) # in order to print in one line
     print(results)
     return random_list
+
+
 '''
 for month, day in random_list:
     print(f"{month} {day},")
@@ -79,8 +81,17 @@ the problem ask to identify if a birthday is shared by more than 1 person,
 it does not ask me for the specific birthday(s), thus, finding the MODE is sufficient
 '''
 
-# sucess = print(mode) or print('The list contains multiple modes')
-def calculate_mode(random_list):
+
+'''
+my function below has a few errors:
+random_list = calculate_random() is generating a new random list, i do not want that, i want to keep the random list i generated in my function above
+
+i need to fix my execption eroror message
+
+based on some experiments, statistics.mode will always return a mode, if no repeating values
+thus, to be in the safe side, its better to jsut use a dictionary 
+
+def find_shared_bday(random_list):
     random_list = calculate_random()
     try:
         mode = statistics.mode(random_list)
@@ -89,7 +100,17 @@ def calculate_mode(random_list):
         if 'no unique mode' in str(e): # no unqiue mode signifies more than one mode
             print('multiple people share multiple birthdays')
         else:
-            raise
+            raise Exception("no birthdays found")
+
+'''
+
+def find_shared_bday(random_list): # passing random_list will keep the list generated in the above
+    try:
+        mode = statistics.mode(random_list)
+        print(f"mutliple people share a birthday on: {mode[0]} {mode[1]}")
+    except statistics.StatisticsError as e:
+        print("Every birthday is unique, no shared birthdays.")
+
 
 '''
 now i need my code to run x amount of times
