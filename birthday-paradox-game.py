@@ -63,10 +63,9 @@ for i in random_list:
 
 def calculate_random(month, day, sample_size): # lets calculate and display random_list, pass month, day rather than re-initilizing it inside the function
     random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
-    print(f"below are the {sample_size} birthdays:")
+    #print(f"below are the {sample_size} birthdays:")
     results = ', '.join([f"{month} {day}" for month, day in random_list]) # in order to print in one line
-    print(results)
-    return random_list
+    return random_list, results
 
 
 '''
@@ -113,7 +112,9 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
             break # stops loop after first shared bday is found
     return shared_birthday, bday_key_set
 
-def print_bday (shared_birthday, bday_key_set):
+def print_bday (results,sample_size,shared_birthday, bday_key_set): # have all prints in one function so while loop does not print each time it runs
+    print(f"below are the {sample_size} birthdays:")
+    print(results)
     if shared_birthday:
         for bday in bday_key_set:
             print(f"the birthday {bday[0]} {bday[1]} were shared by multiple people")
@@ -124,21 +125,21 @@ def print_bday (shared_birthday, bday_key_set):
 def initiate():
     instructions() 
     month, day, sample_size = data() # call data function to unpack its return values
-    random_list = calculate_random(month, day, sample_size)
+    random_list, results = calculate_random(month, day, sample_size)
     shared_birthday, bday_key_set = find_shared_bday(random_list)
-    print_bday(shared_birthday, bday_key_set)
-    simulation_amount = 10
+    print_bday(results,sample_size,shared_birthday, bday_key_set)
+    simulation_amount = 5
     print('now we will run the simulation ', simulation_amount, ' times')
     x = 0 # loop iterator
     bday_count = 0
+    shared_birthday = False # initialize as false so bday_count does not count it if its value is true from the first round
     while x <= simulation_amount:
-        random_list = calculate_random(month, day, sample_size)
+        random_list, results = calculate_random(month, day, sample_size)
         shared_birthday, bday_key_set = find_shared_bday(random_list) # even though i do not need bday_key_set, still refernce it in my while loop or else valuie error b/c two values will try to be placed into one
         if shared_birthday == True:
             bday_count += 1
         x += 1
     print(bday_count)
-
 
 
 '''
