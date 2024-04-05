@@ -26,7 +26,8 @@ def instructions():
 def data ():
     month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     day = list(range(1, 32)) # use list function to pass range(1,32), avoding to need to type 1 - 31
-    return month, day
+    sample_size = int(input('how many birthdays should I generate: ')) # moving to data() so its unaffeted by while loop
+    return month, day, sample_size
 
 '''
 # lets try to use a random tool to select a month and day
@@ -60,8 +61,7 @@ for i in random_list:
     # since my list contains tuples, i can use two for loop iterator to address them each
 '''
 
-def calculate_random(month, day): # lets calculate and display random_list, pass month, day rather than re-initilizing it inside the function
-    sample_size = int(input('how many birthdays should I generate: '))
+def calculate_random(month, day, sample_size): # lets calculate and display random_list, pass month, day rather than re-initilizing it inside the function
     random_list = [(random.choice(month), random.choice(day)) for i in range(sample_size)] # [will contain the list] (is the tuples inside the list - seperated by a comma)
     print(f"below are the {sample_size} birthdays:")
     results = ', '.join([f"{month} {day}" for month, day in random_list]) # in order to print in one line
@@ -119,11 +119,11 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
 
 def initiate():
     instructions() 
-    month, day = data() # call data function to unpack its return values
+    month, day, sample_size = data() # call data function to unpack its return values
     sim_amount = 2
     x = 0
     while x <= sim_amount:
-        random_list = calculate_random(month, day)
+        random_list = calculate_random(month, day, sample_size)
         find_shared_bday(random_list)
         x += 1
 
