@@ -106,6 +106,40 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
     
     shared_birthday = False # created varible to avoid having return statements inside my for loop
+    bday_key_set = set()
+    for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
+        if value > 1:
+            shared_birthday = True 
+            bday_key_set.add(key)
+            break # stops loop after first shared bday is found
+    return shared_birthday, bday_key_set
+
+def print_bday (shared_birthday, bday_key_set):
+    if shared_birthday:
+        for bday in bday_key_set:
+            print(f"the birthday {bday[0]} {bday[1]} were shared by multiple people")
+    else:
+        print('no shared bday were found')
+    
+
+def initiate():
+    instructions() 
+    month, day, sample_size = data() # call data function to unpack its return values
+    random_list = calculate_random(month, day, sample_size)
+    shared_birthday, bday_key_set = find_shared_bday(random_list)
+    print_bday(shared_birthday, bday_key_set)
+    
+
+
+
+'''
+keeping historical record of code that i am altering
+def find_shared_bday(random_list): # passing random_list will keep the list generated in the above
+    birth_month_day = {} # will store the key:value pairs
+    for month, day in random_list: 
+        birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
+    
+    shared_birthday = False # created varible to avoid having return statements inside my for loop
     for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
         if value > 1:
             print(f"the birthday {key[0]} {key[1]} were shared by multiple people")
@@ -113,9 +147,16 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
             break
     if not shared_birthday:
         print('no birthdays were shared')
-    print(random_list) # needed for while loop to check if random_list changes or stays the same
-    # no return statment needed as we're not storing any result of this function in a varible, or expresssion. - as of yet
+    # print(random_list) - needed for while loop to check if random_list changes or stays the same - confirmed it worked
+
     
+def boolean_shared_bday(shared_birthday):
+    shared_birthday = find_shared_bday()
+    if shared_birthday == True:
+        print('a birthday was shared by multiple people')
+    print(shared_birthday)
+
+def run_simulation(): # run simulation without printing each key, value pair from find_shared_bday()
 
 def initiate():
     instructions() 
@@ -126,6 +167,7 @@ def initiate():
         random_list = calculate_random(month, day, sample_size)
         find_shared_bday(random_list)
         x += 1
+'''
 
 '''
 Setting up the simulation
@@ -136,6 +178,11 @@ to see if a shared bday is found over n amount of simulations thus - i can ask t
 sample size = 25 hard coding the value and not needing to ask the for amount after each simulation
 
 i can put the while loop on top of random_list = calculate_random() function, that way the random list gets generated after each iteration
+
+update - the while loop prints out each time it runs, due to print statement in find_shared_bday()
+thus, i should create another function soley for the simulation rounds
+
+update pt2 - i believe an efficient route to take is to seperate the code that finds if shared from printing the amount
 
 tracking simulation
 create a varible to determine the amount of times it runs
