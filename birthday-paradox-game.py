@@ -105,7 +105,6 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
     for month, day in random_list: 
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
     
-    print(random_list)
     shared_birthday = False # created varible to avoid having return statements inside my for loop
     for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
         if value > 1:
@@ -114,14 +113,19 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
             break
     if not shared_birthday:
         print('no birthdays were shared')
+    print(random_list) # needed for while loop to check if random_list changes or stays the same
     # no return statment needed as we're not storing any result of this function in a varible, or expresssion. - as of yet
     
 
 def initiate():
     instructions() 
     month, day = data() # call data function to unpack its return values
-    random_list = calculate_random(month, day)
-    find_shared_bday(random_list)
+    sim_amount = 2
+    x = 0
+    while x <= sim_amount:
+        random_list = calculate_random(month, day)
+        find_shared_bday(random_list)
+        x += 1
 
 '''
 Setting up the simulation
@@ -130,6 +134,8 @@ find_shared_bday() is the simulation - will need to be inside a while loop based
 wait - if i put a while loop over find_shared_bdaY() - it will continue looping using the same values from random_list - instead, i want the loop to restart with fresh new values
 to see if a shared bday is found over n amount of simulations thus - i can ask the user once, then before i run the total x amount of simulations - i set the value of 
 sample size = 25 hard coding the value and not needing to ask the for amount after each simulation
+
+i can put the while loop on top of random_list = calculate_random() function, that way the random list gets generated after each iteration
 
 tracking simulation
 create a varible to determine the amount of times it runs
