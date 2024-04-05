@@ -106,14 +106,12 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
     shared_birthday = False # created varible to avoid having return statements inside my for loop
     bday_key_set = set()
-    simulation_counter = 0
     for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
         if value > 1:
             shared_birthday = True 
             bday_key_set.add(key)
-            simulation_counter += 1
             break # stops loop after first shared bday is found
-    return shared_birthday, bday_key_set, simulation_counter
+    return shared_birthday, bday_key_set
 
 def print_bday (shared_birthday, bday_key_set):
     if shared_birthday:
@@ -122,10 +120,6 @@ def print_bday (shared_birthday, bday_key_set):
     else:
         print('no shared bday were found')
     
-def run_simulation(shared_birthday, simulation_counter):
-    simulation_amount = 10
-    print('now we will run the simulation ', simulation_amount, ' times')
-    
 
 def initiate():
     instructions() 
@@ -133,7 +127,17 @@ def initiate():
     random_list = calculate_random(month, day, sample_size)
     shared_birthday, bday_key_set = find_shared_bday(random_list)
     print_bday(shared_birthday, bday_key_set)
-    
+    simulation_amount = 10
+    print('now we will run the simulation ', simulation_amount, ' times')
+    x = 0 # loop iterator
+    bday_count = 0
+    while x <= simulation_amount:
+        random_list = calculate_random(month, day, sample_size)
+        shared_birthday, bday_key_set = find_shared_bday(random_list) # even though i do not need bday_key_set, still refernce it in my while loop or else valuie error b/c two values will try to be placed into one
+        if shared_birthday == True:
+            bday_count += 1
+        x += 1
+    print(bday_count)
 
 
 
@@ -174,6 +178,15 @@ def initiate():
         random_list = calculate_random(month, day, sample_size)
         find_shared_bday(random_list)
         x += 1
+
+def run_simulation():
+    simulation_amount = 10
+    print('now we will run the simulation ', simulation_amount, ' times')
+    x = 0 # loop iterator
+    while x <= simulation_amount:
+        random_list = calculate_random(month, day, sample_size)
+        shared_birthday = find_shared_bday(random_list)
+
 '''
 
 '''
@@ -195,6 +208,11 @@ update pt3 - i have set up my simulation to handle multiple rounds without print
 
 tracking simulation
 i am not sure if i should create a function just to run the while loop (i should b/c i need to show the user the first round simulation)
+
+update - i initially created a simulation function, but decided to just place the while loop inside the initiate function since everything has been called already
+
+update - if i want to reference 
+
 
 create a varible to determine the amount of times it runs
 create a varible within find_shared_bday() to keep track of the amount of times it found a shared bday
