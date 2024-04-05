@@ -105,11 +105,13 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
     for month, day in random_list: 
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
     
+    print(random_list)
     shared_birthday = False # created varible to avoid having return statements inside my for loop
     for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
         if value > 1:
             print(f"the birthday {key[0]} {key[1]} were shared by multiple people")
             shared_birthday = True # removed the return from the for loop - it immeditly stops the loop after first iterator
+            break
     if not shared_birthday:
         print('no birthdays were shared')
     # no return statment needed as we're not storing any result of this function in a varible, or expresssion. - as of yet
@@ -122,10 +124,18 @@ def initiate():
     find_shared_bday(random_list)
 
 '''
-now i need my code to run x amount of times
-each time it runs, it needs to keep track if a mode was found (single or multiple mode)
-once the simulation is over, i need to output the amount of times a mode was found
-i then divide by the x amount of times it ran, and generate a average percentage 
+Setting up the simulation
+find_shared_bday() is the simulation - will need to be inside a while loop based on the total amount of desired simulation
+
+wait - if i put a while loop over find_shared_bdaY() - it will continue looping using the same values from random_list - instead, i want the loop to restart with fresh new values
+to see if a shared bday is found over n amount of simulations thus - i can ask the user once, then before i run the total x amount of simulations - i set the value of 
+sample size = 25 hard coding the value and not needing to ask the for amount after each simulation
+
+tracking simulation
+create a varible to determine the amount of times it runs
+create a varible within find_shared_bday() to keep track of the amount of times it found a shared bday
+after total amount of siumulations runs, peforme an average
+
 '''
 
 initiate()
