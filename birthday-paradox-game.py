@@ -104,15 +104,16 @@ def find_shared_bday(random_list): # passing random_list will keep the list gene
     birth_month_day = {} # will store the key:value pairs
     for month, day in random_list: 
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
-    
     shared_birthday = False # created varible to avoid having return statements inside my for loop
     bday_key_set = set()
+    simulation_counter = 0
     for key, value in birth_month_day.items(): # key == (month, day) tuple, value == the count for each tuple, .items() is view-object of the key:value pair within the dictionary
         if value > 1:
             shared_birthday = True 
             bday_key_set.add(key)
+            simulation_counter += 1
             break # stops loop after first shared bday is found
-    return shared_birthday, bday_key_set
+    return shared_birthday, bday_key_set, simulation_counter
 
 def print_bday (shared_birthday, bday_key_set):
     if shared_birthday:
@@ -120,6 +121,10 @@ def print_bday (shared_birthday, bday_key_set):
             print(f"the birthday {bday[0]} {bday[1]} were shared by multiple people")
     else:
         print('no shared bday were found')
+    
+def run_simulation(shared_birthday, simulation_counter):
+    simulation_amount = 10
+    print('now we will run the simulation ', simulation_amount, ' times')
     
 
 def initiate():
@@ -134,6 +139,8 @@ def initiate():
 
 '''
 keeping historical record of code that i am altering
+
+
 def find_shared_bday(random_list): # passing random_list will keep the list generated in the above
     birth_month_day = {} # will store the key:value pairs
     for month, day in random_list: 
@@ -184,7 +191,11 @@ thus, i should create another function soley for the simulation rounds
 
 update pt2 - i believe an efficient route to take is to seperate the code that finds if shared from printing the amount
 
+update pt3 - i have set up my simulation to handle multiple rounds without printing the random list each time
+
 tracking simulation
+i am not sure if i should create a function just to run the while loop (i should b/c i need to show the user the first round simulation)
+
 create a varible to determine the amount of times it runs
 create a varible within find_shared_bday() to keep track of the amount of times it found a shared bday
 after total amount of siumulations runs, peforme an average
