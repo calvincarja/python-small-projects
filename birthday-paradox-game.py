@@ -128,7 +128,7 @@ def initiate():
     random_list, results = calculate_random(month, day, sample_size)
     shared_birthday, bday_key_set = find_shared_bday(random_list)
     print_bday(results,sample_size,shared_birthday, bday_key_set)
-    simulation_amount = 5
+    simulation_amount = 1000
     print('now we will run the simulation ', simulation_amount, ' times')
     x = 0 # loop iterator
     bday_count = 0
@@ -139,7 +139,8 @@ def initiate():
         if shared_birthday == True:
             bday_count += 1
         x += 1
-    print(bday_count)
+    average = (bday_count/simulation_amount)*100
+    print(f"out of {simulation_amount} times, a shared birthday was found {format(average,'.2f')}% of the times")
 
 
 '''
@@ -212,11 +213,8 @@ i am not sure if i should create a function just to run the while loop (i should
 
 update - i initially created a simulation function, but decided to just place the while loop inside the initiate function since everything has been called already
 
-update - if i want to reference 
-
-
-create a varible to determine the amount of times it runs
-create a varible within find_shared_bday() to keep track of the amount of times it found a shared bday
+create a varible to determine the amount of times it runs (complete)
+create a varible within find_shared_bday() to keep track of the amount of times it found a shared bday (complete)
 after total amount of siumulations runs, peforme an average
 
 '''
