@@ -128,12 +128,12 @@ def initiate():
     random_list, results = calculate_random(month, day, sample_size)
     shared_birthday, bday_key_set = find_shared_bday(random_list)
     print_bday(results,sample_size,shared_birthday, bday_key_set)
-    simulation_amount = 1000
+    simulation_amount = 100000
     print('now we will run the simulation ', simulation_amount, ' times')
     x = 0 # loop iterator
     bday_count = 0
     shared_birthday = False # initialize as false so bday_count does not count it if its value is true from the first round
-    press_enter = input(f"press enter to run the simulation {simulation_amount} times")
+    press_enter = input(f"press enter to run the simulation {simulation_amount} times ") # will ask user to press enter
     while x <= simulation_amount:
         random_list, results = calculate_random(month, day, sample_size)
         shared_birthday, bday_key_set = find_shared_bday(random_list) # even though i do not need bday_key_set, still refernce it in my while loop or else valuie error b/c two values will try to be placed into one
