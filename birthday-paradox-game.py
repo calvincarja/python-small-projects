@@ -220,4 +220,9 @@ after total amount of siumulations runs, peforme an average
 
 '''
 
+'''
+after checking the soulition in my textbook, the only change i would make is select the dates from the same year
+this ensures the dates are valid (i.e feb 30 will never be an option) - to implement this i just need the date library
+'''
+
 initiate()
