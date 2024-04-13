@@ -23,7 +23,7 @@ def instructions():
      Lets begin!
       """)
 
-def data ():
+def data (): # in the future, validate with date library
     month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     day = list(range(1, 32)) # use list function to pass range(1,32), avoding to need to type 1 - 31
     sample_size = int(input('how many birthdays should I generate: ')) # moving to data() so its unaffeted by while loop
@@ -100,7 +100,7 @@ def find_shared_bday(random_list):
 '''
 
 def find_shared_bday(random_list): # passing random_list will keep the list generated in the above
-    birth_month_day = {} # will store the key:value pairs
+    birth_month_day = {} # will store the key:value pairs, its a dictionarty
     for month, day in random_list: 
         birth_month_day[month, day] = birth_month_day.get((month, day), 0) + 1 # stores tuples in dictionary
     shared_birthday = False # created varible to avoid having return statements inside my for loop
